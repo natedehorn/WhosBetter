@@ -1,7 +1,9 @@
+import java.text.DecimalFormat;
+
 import dto.Static.Champion;
 import dto.Stats.AggregatedStats;
 
-public class championClass {
+public class championClass{
 	public String championName;
 	public float gamesPlayed;
 	public float gamesWon;
@@ -16,7 +18,7 @@ public class championClass {
 	public float damageTaken;
 
 	//constructor
-	public championClass(Champion champID, AggregatedStats aggStats)
+	public championClass(Champion champID, AggregatedStats aggStats) 
 	{
 		float totalGold = 0;
 		float totalKills = 0;
@@ -47,4 +49,24 @@ public class championClass {
 		damageTaken = totalDamageT / gamesPlayed;
 	}
 	
+	public void showStats()
+	{
+		DecimalFormat df1 = new DecimalFormat("###.#");
+        DecimalFormat df2 = new DecimalFormat("###.##");
+		System.out.println("******************************");
+    	System.out.println("Ranked Stats for: " + championName); //Print championName
+    	System.out.println("------------------------------");
+    	System.out.println("Total games played: " + df1.format(gamesPlayed)); //Print gamesPlayed
+        System.out.println("Wins: " + df1.format(gamesWon)); //Print Wins
+        System.out.println("Losses: " + df1.format(gamesLost)); //Print Losses
+        System.out.println("Win Percentage: " + df2.format(winPercentage) + "%"); //Print out win percentage and round
+        System.out.println("Gold Earned Per Game: " + df1.format(goldEarned / 1000) + "k"); //Print avgGoldEarned and round
+        System.out.println("Kills Per Game: " + df1.format(avgKills)); //Print avgKills and round
+        System.out.println("Deaths Per Game: " + df1.format(avgDeaths)); //Print avgDeaths and round
+        System.out.println("Assists Per Game: " + df1.format(avgAssists)); //Print avgAssists and round
+        System.out.println("Minion Kills Per Game: " + df2.format(minionKills)); //Print minionKills and round
+        System.out.println("Damage Dealt Per Game: " + df1.format(damageDealt / 1000) + "k"); // Print damageDealt and round
+        System.out.println("Damage Taken Per Game: " + df1.format(damageTaken / 1000) + "k"); //Print damageTaken and round
+        System.out.println("******************************");
+	}
 }
