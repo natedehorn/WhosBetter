@@ -53,20 +53,53 @@ public class championClass{
 	{
 		DecimalFormat df1 = new DecimalFormat("###.#");
         DecimalFormat df2 = new DecimalFormat("###.##");
-		System.out.println("******************************");
-    	System.out.println("Ranked Stats for: " + championName); //Print championName
-    	System.out.println("------------------------------");
-    	System.out.println("Total games played: " + df1.format(gamesPlayed)); //Print gamesPlayed
-        System.out.println("Wins: " + df1.format(gamesWon)); //Print Wins
-        System.out.println("Losses: " + df1.format(gamesLost)); //Print Losses
-        System.out.println("Win Percentage: " + df2.format(winPercentage) + "%"); //Print out win percentage and round
-        System.out.println("Gold Earned Per Game: " + df1.format(goldEarned / 1000) + "k"); //Print avgGoldEarned and round
-        System.out.println("Kills Per Game: " + df1.format(avgKills)); //Print avgKills and round
-        System.out.println("Deaths Per Game: " + df1.format(avgDeaths)); //Print avgDeaths and round
-        System.out.println("Assists Per Game: " + df1.format(avgAssists)); //Print avgAssists and round
-        System.out.println("Minion Kills Per Game: " + df2.format(minionKills)); //Print minionKills and round
-        System.out.println("Damage Dealt Per Game: " + df1.format(damageDealt / 1000) + "k"); // Print damageDealt and round
-        System.out.println("Damage Taken Per Game: " + df1.format(damageTaken / 1000) + "k"); //Print damageTaken and round
-        System.out.println("******************************");
+		System.out.println("************************************************************");
+    	System.out.println("Ranked Stats for: " + championName + "  |  Total games played: " + df1.format(gamesPlayed)); //Print championName and gamesPlayed
+    	System.out.println("------------------------------------------------------------");
+        System.out.println("                  Wins | " + df1.format(gamesWon)); //Print Wins
+        System.out.println("                Losses | " + df1.format(gamesLost)); //Print Losses
+        System.out.println("");
+        System.out.print("        Win Percentage | " + (int)(winPercentage) + "%   "); //Print out win percentage and round
+        percentToGraphic(winPercentage);
+        System.out.println("");
+        System.out.print("  Gold Earned Per Game | " + df1.format(goldEarned / 1000) + "k "); //Print avgGoldEarned and round
+        goldToCoin(goldEarned/1000);
+        System.out.println("");
+        System.out.println("        Kills Per Game | " + df1.format(avgKills)); //Print avgKills and round
+        System.out.println("       Deaths Per Game | " + df1.format(avgDeaths)); //Print avgDeaths and round
+        System.out.println("      Assists Per Game | " + df1.format(avgAssists)); //Print avgAssists and round
+        System.out.println("");
+        System.out.println(" Minion Kills Per Game | " + df2.format(minionKills)); //Print minionKills and round
+        System.out.println(" Damage Dealt Per Game | " + df1.format(damageDealt / 1000) + "k"); // Print damageDealt and round
+        System.out.println(" Damage Taken Per Game | " + df1.format(damageTaken / 1000) + "k"); //Print damageTaken and round
+        System.out.println("");
+        System.out.println("************************************************************");
+        System.out.println("************************************************************");
+        System.out.println("");
 	}
+	
+	private void goldToCoin(float gold) {
+		for(int i = 0; i < (int)gold; i++)
+		{
+			System.out.print("\033[90;103m| \033[0m");
+		}
+		System.out.print("\033[90;103m|\033[0m");
+		System.out.println("");
+	}
+
+	private void percentToGraphic(float num) {
+		int firstValue = (int)(num * .3);
+		int secondValue = 30 - firstValue;
+		for(int i = 0; i < firstValue; i++)
+		{
+			System.out.print("\033[102m \033[0m");
+		}
+		for(int i = 0; i < secondValue; i++)
+		{
+			System.out.print("\033[101m \033[0m");
+		}
+		System.out.print(System.lineSeparator());
+	}
+	
+	
 }
