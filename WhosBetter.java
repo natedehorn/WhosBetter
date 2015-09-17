@@ -17,8 +17,5 @@ public class WhosBetter {
                 Player player2 = new Player(summonerName);
                 player2.displayStats();
                 in.close();
-                
-                //System.out.println("Summoners to be compared: " + summoner1.getName() + " vs. " + summoner2.getName());
-                //statSummary(summoner1);
         }
 }
