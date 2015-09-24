@@ -13,7 +13,7 @@ import main.java.riotapi.RiotApiException;
 public class Player {
 	public String summonerName;
 	public static Vector<championClass> championData;
-	
+
 	//constructor
 	public Player(String summName) throws RiotApiException
 	{
@@ -22,24 +22,36 @@ public class Player {
 		summonerName = summName.toLowerCase();
 		Summoner summoner = api.getSummonersByName(Region.NA, summonerName).get(summonerName); //Set summoner
 		RankedStats rankedStats = api.getRankedStats(summoner.getId()); //Get summoner1 ranked statistics
-        List<ChampionStats> statList = rankedStats.getChampions(); //Get ranked champion statistics
-		
-        for(ChampionStats championStats : statList)
-        {
-        	if(championStats.getId() != 0) //id 0 for overall ranked stats
-        	{
-        		AggregatedStats aggregatedStats = championStats.getStats(); //Get all stats
-        		championClass temp = new championClass(api.getDataChampion(championStats.getId()), aggregatedStats);
-        		championData.addElement(temp);
-        	}
-        }
+		List<ChampionStats> statList = rankedStats.getChampions(); //Get ranked champion statistics
+
+		for(ChampionStats championStats : statList)
+		{
+			if(championStats.getId() != 0) //id 0 for overall ranked stats
+			{
+				AggregatedStats aggregatedStats = championStats.getStats(); //Get all stats
+				championClass temp = new championClass(api.getDataChampion(championStats.getId()), aggregatedStats);
+				championData.addElement(temp);
+			}
+		}
 	}
-	
+
 	public void displayStats()
 	{
 		for (Enumeration<championClass> e = Player.championData.elements(); e.hasMoreElements();)
-        {
-        	e.nextElement().showStats();
-        }
+		{
+			e.nextElement().showStats();
+		}
 	}
+
+	public Vector<championClass> getVector() 
+	{
+		return championData;
+	}
+
+	public String getName() 
+	{
+		return summonerName;
+	}
+	
+	
 }
