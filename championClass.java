@@ -153,7 +153,6 @@ public class championClass{
 		System.out.print(System.lineSeparator());
 	}
 
-
 	//Method to return championName
 	public String getName() 
 	{

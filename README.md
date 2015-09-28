@@ -10,3 +10,4 @@ I also use jfreecharts to create visuals. The source code and documentation can 
 rithms' documentation can be found here: http://rithms.net/riot-api-java/#doc
 
 The documentation for the Riot API can be found here: https://developer.riotgames.com/api/methods
+s

@@ -1,6 +1,14 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Vector;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 import constant.Region;
 import dto.Stats.AggregatedStats;
@@ -21,7 +29,7 @@ public class Player {
 		championData = new Vector<championClass>();
 		summonerName = summName.toLowerCase();
 		Summoner summoner = api.getSummonersByName(Region.NA, summonerName).get(summonerName); //Set summoner
-		RankedStats rankedStats = api.getRankedStats(summoner.getId()); //Get summoner1 ranked statistics
+		RankedStats rankedStats = api.getRankedStats(summoner.getId()); //Get summoner ranked statistics
 		List<ChampionStats> statList = rankedStats.getChampions(); //Get ranked champion statistics
 
 		for(ChampionStats championStats : statList)
@@ -43,7 +51,7 @@ public class Player {
 		}
 	}
 
-	public Vector<championClass> getVector() 
+	public static Vector<championClass> getVector() 
 	{
 		return championData;
 	}
@@ -51,6 +59,38 @@ public class Player {
 	public String getName() 
 	{
 		return summonerName;
+	}
+
+	public void graph() throws IOException 
+	{
+		final String kills = "Kills";              
+		final String deaths = "Deaths";              
+		final String assists = "Assists";        
+		final DefaultCategoryDataset dataset = new DefaultCategoryDataset(); 
+
+		for (Enumeration<championClass> e = Player.getVector().elements(); e.hasMoreElements();)
+		{
+			championClass current = e.nextElement();
+			final String championName = current.getName();
+			dataset.addValue(current.getKills(), kills, championName);
+			dataset.addValue(current.getDeaths(), deaths, championName);
+			dataset.addValue(current.getAssists(), assists, championName);
+		}
+		
+		final JFreeChart chart = ChartFactory.createBarChart3D(
+				"3D Bar Chart Demo",      // chart title
+				"Champion",               // domain axis label
+				"Value",                  // range axis label
+				dataset,                  // data
+				PlotOrientation.VERTICAL, // orientation
+				true,                     // include legend
+				true,                     // tooltips
+				false                     // urls
+				);
+		
+		String filename = summonerName + "-chart.jpg";
+		ChartUtilities.saveChartAsJPEG(new File(filename), chart, 500, 300);
+		
 	}
 	
 	
