@@ -9,13 +9,13 @@ public class WhosBetter {
 		System.out.println("Enter first summoner name: ");
 		String summonerName = in.nextLine();
 		Player player1 = new Player(summonerName);
-		player1.displayStats();
+		//player1.displayStats();
 		player1.graph();
 		System.out.println("");
 		System.out.println("Enter second summoner name: ");
 		summonerName = in.nextLine();
 		Player player2 = new Player(summonerName);
-		player2.displayStats();
+		//player2.displayStats();
 		player2.graph();
 		in.close();
 	}

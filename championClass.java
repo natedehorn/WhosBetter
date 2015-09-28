@@ -1,9 +1,11 @@
 import java.text.DecimalFormat;
+import java.util.Comparator;
 
 import dto.Static.Champion;
 import dto.Stats.AggregatedStats;
 
-public class championClass{
+public class championClass implements Comparable<championClass>
+{
 	public String championName;
 	public float gamesPlayed;
 	public float gamesWon;
@@ -177,4 +179,33 @@ public class championClass{
 		return avgAssists;
 	}
 
+	public float getGold()
+	{
+		return goldEarned;
+	}
+
+
+	public static Comparator<championClass> champNameComparator = new Comparator<championClass>() {
+
+		public int compare(championClass cc1, championClass cc2) {
+
+			String champName1 = cc1.getName().toUpperCase();
+			String champName2 = cc2.getName().toUpperCase();
+
+			//ascending order
+			return champName1.compareTo(champName2);
+
+			//descending order
+			//return fruitName2.compareTo(fruitName1);
+		}
+
+	};
+
+	@Override
+	public int compareTo(championClass cc) {
+		int compareKills = (int) cc.avgKills;
+
+		//ascending order
+		return (int) (this.avgKills - compareKills);
+	}
 }
